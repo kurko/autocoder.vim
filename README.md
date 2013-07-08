@@ -16,29 +16,33 @@ If you type `store/special_cart`, it will generate the following two files:
 
 * `lib/store/special_cart.rb`
 
-    module Store
-      class SpecialCart
-        def initialize(options)
-          @options = options
-        end
-
-        private
-
-        attr_reader :options
-      end
+```ruby
+module Store
+  class SpecialCart
+    def initialize(options)
+      @options = options
     end
 
-* `spec/lib/store/special_cart_spec.rb
+    private
 
-    require "store/special_cart"
+    attr_reader :options
+  end
+end
+```
 
-    describe Store::SpecialCart do
-      describe "#some_method" do
-        it "returns true" do
+* `spec/lib/store/special_cart_spec.rb`
 
-        end
-      end
+```ruby
+require "store/special_cart"
+
+describe Store::SpecialCart do
+  describe "#some_method" do
+    it "returns true" do
+
     end
+  end
+end
+```
 
 ### Known issues
 
@@ -46,3 +50,9 @@ If you type `store/special_cart`, it will generate the following two files:
 * it only works with RSpec
 * if the file already exists, it'll add the boilerplate code anyway
 * the code is messy, but it solves my problems
+
+Please, send patches to fix these problems.
+
+### License
+
+MIT. Do what you want with it, but please consider contributing back :)
