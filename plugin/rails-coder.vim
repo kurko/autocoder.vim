@@ -107,7 +107,11 @@ function! RailsCoderCreateClassFile()
   " CREATES THE RSPEC CODE
 
   " We're only creating these classes inside spec/lib/
-  exec ":cd ./spec/lib"
+  if isdirectory("spec/lib")
+    exec ":cd ./spec/lib"
+  else
+    exec ":cd ./spec"
+  endif
 
   " Iterates over each namespace. If store/cart/item was entered, iterates
   " on store, cart and item, creating the subdirectories recursively if they
@@ -149,4 +153,4 @@ function! RailsCoderCreateClassFile()
   execute ":redraw!"
 endfunction
 
-command! RC call RailsCoderCreateClassFile()
+command! AC call RailsCoderCreateClassFile()
