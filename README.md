@@ -8,7 +8,7 @@ So I wrote this plugin.
 
 ## How to
 
-Type `:RC`. Vim will ask you what's the path of the class you want to create:
+Type `:AC`. Vim will ask you what's the path of the class you want to create:
 
     Type the path (e.g store/cart/item):
 
