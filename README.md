@@ -1,14 +1,14 @@
 # autocoder.vim
 
-Creating appropriate classes in a Rails project improves your project. However,
-the process of creating them and their RSpec tests is
-annoying and painful (specially for someone lazy like me).
+Creating appropriate classes and unit tests in a Rails project improves your
+design. However, their creation process tends to be painful in whatever editor
+you use.
 
 So I wrote this plugin.
 
-## How to
+## Feature: auto-creating class and unit specs
 
-Type `:AC`. Vim will ask you what's the path of the class you want to create:
+Type `:AC` (from **A**uto**C**oder). Vim will ask you what's the path of the class you want to create:
 
     Type the path (e.g store/cart/item):
 
@@ -44,12 +44,39 @@ describe Store::SpecialCart do
 end
 ```
 
+## Feature: auto-creating contract classes
+
+Creating contract tests is tedious. Given you have a class like this one:
+
+```ruby
+# lib/user.rb
+class User
+  def name
+    # ...
+  end
+end
+```
+
+Type `:AContract`. This will create the following file:
+
+```ruby
+# spec/contracts/lib/user_contract.rb
+shared_examples_for "a user" do
+  subject { User.new }
+
+  it "responds to name" do
+    subject.should respond_to(:name)
+  end
+end
+```
+
+Explaining the idea behind contract tests is beyond the scope of this readme.
+
 ### Known issues
 
 * it only works for files in the lib dir
 * it only works with RSpec
 * if the file already exists, it'll add the boilerplate code anyway
-* the code is messy, but it solves my problems
 
 Please, send patches to fix these problems.
 
