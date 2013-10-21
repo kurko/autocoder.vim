@@ -41,6 +41,7 @@ function! CreateRubyContractTest()
         continue
       end
 
+      let l:code .= "\n"
       let l:code .= '  it "responds to ' . l:method . '" do'
       let l:code .= "\n"
       let l:code .= '    subject.should respond_to(:' . l:method . ')'
@@ -50,20 +51,35 @@ function! CreateRubyContractTest()
     endif
   endfor
 
+  let l:contract_file_path = CurrentContractFilePath("ruby", l:filepath)
+  let l:contract_file_content = readfile(l:contract_file_path)
+
   " Generates the contract test code
   if !empty(l:code)
     let l:human_class_name = substitute(l:class_name_snake, '_', ' ', '')
 
-    let l:header = 'shared_examples_for "a ' . l:human_class_name . '" do'
+    let l:header = ''
+    let l:current_contract_title = matchstr(l:contract_file_content, 'shared_examples')
+
+    if empty(l:current_contract_title)
+      let l:header .= 'shared_examples_for "a ' . l:human_class_name . '" do'
+    else
+      let l:header .= l:current_contract_title
+    endif
+
     let l:header .= "\n"
-    let l:header .= '  subject { ' . l:class_name . '.new }'
-    let l:header .= "\n"
+
+    let l:current_subject_class = matchstr(l:contract_file_content, 'subject')
+
+    if empty(l:current_subject_class)
+      let l:header .= '  subject { ' . l:class_name . '.new }'
+    else
+      let l:header .= l:current_subject_class
+    endif
 
     let l:code = l:header . "\n" . l:code
     let l:code .= "end"
   endif
-
-  let l:contract_file_path = CurrentContractFilePath("ruby", l:filepath)
 
   execute ":split"
   execute ":wincmd j"
