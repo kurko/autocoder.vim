@@ -78,7 +78,7 @@ function! CreateRubyContractTest()
 
   " Saves the current file
   execute ":w"
-  execute ":wincmd h"
+  execute ":wincmd k"
 endfunction
 
 function! IsRubyClass()
