@@ -20,6 +20,12 @@ function! CreateRubyContractTest()
 
   for line in l:file
     let l:current_method_line = matchstr(line, "def.*")
+    let l:current_line = match(l:file, line)
+
+    if l:current_line >= l:private_start_line
+      break
+    endif
+
     if l:current_method_line >= 0
 
       let l:method = l:current_method_line
@@ -58,7 +64,14 @@ function! CreateRubyContractTest()
   if !empty(l:code)
     let l:human_class_name = substitute(l:class_name_snake, '_', ' ', '')
 
+    let l:class_path_without_lib = substitute(l:filepath, '^lib/', '', '')
+    let l:class_path_without_lib = substitute(l:class_path_without_lib, '\.rb$', '', '')
+
     let l:header = ''
+    let l:header .= 'require "' . l:class_path_without_lib . '"'
+    let l:header .= "\n"
+    let l:header .= "\n"
+
     let l:current_contract_title = matchstr(l:contract_file_content, 'shared_examples')
 
     if empty(l:current_contract_title)
