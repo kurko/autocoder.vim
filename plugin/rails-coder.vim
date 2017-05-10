@@ -21,17 +21,14 @@ function! RailsCoderClassFileString(...)
     let current_index += 1
   endfor
 
-  let l:code = l:code . "def initialize(options)\n"
-  let l:code = l:code . "@options = options\n"
+  let l:code = l:code . "def initialize(var)\n"
+  let l:code = l:code . "@var = var\n"
   let l:code = l:code . "end\n"
   let l:code = l:code . "\n"
   let l:code = l:code . "def method\n"
+  let l:code = l:code . "puts @var\n"
   let l:code = l:code . "\n"
-  let l:code = l:code . "end\n"
-  let l:code = l:code . "\n"
-  let l:code = l:code . "private\n"
-  let l:code = l:code . "\n"
-  let l:code = l:code . "attr_reader :options"
+  let l:code = l:code . "end"
 
   for i in l:class_names
     let l:code = l:code . "\nend"
@@ -53,7 +50,7 @@ function! RailsCoderSpecFileString(...)
 
   let l:code = "require \"" . join(l:class_names, "/") . "\"\n"
   let l:code = l:code . "\n"
-  let l:code = l:code . "describe " . join(l:camel_cased_class_names, "::") . " do\n"
+  let l:code = l:code . "RSpec.describe " . join(l:camel_cased_class_names, "::") . " do\n"
   let l:code = l:code . "let(:item) { double }\n"
   let l:code = l:code . "\n"
   let l:code = l:code . "subject { described_class.new(item) }\n"
