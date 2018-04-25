@@ -26,8 +26,8 @@ function! RailsCoderClassFileString(...)
   let l:code = l:code . "end\n"
   let l:code = l:code . "\n"
   let l:code = l:code . "def method\n"
+  let l:code = l:code . "# Put your implementation here\n"
   let l:code = l:code . "puts @var\n"
-  let l:code = l:code . "\n"
   let l:code = l:code . "end"
 
   for i in l:class_names
@@ -48,15 +48,15 @@ function! RailsCoderSpecFileString(...)
     echo l:camel_cased_class_names
   endfor
 
-  let l:code = "require \"" . join(l:class_names, "/") . "\"\n"
+  let l:code = "require '" . join(l:class_names, "/") . "'\n"
   let l:code = l:code . "\n"
-  let l:code = l:code . "RSpec.describe " . join(l:camel_cased_class_names, "::") . " do\n"
-  let l:code = l:code . "let(:item) { instance_double() }\n"
+  let l:code = l:code . "describe " . join(l:camel_cased_class_names, "::") . " do\n"
+  let l:code = l:code . "let(:item) { instance_double('Class', method: true) }\n"
   let l:code = l:code . "\n"
   let l:code = l:code . "subject { described_class.new(item) }\n"
   let l:code = l:code . "\n"
-  let l:code = l:code . "describe \"#method\" do\n"
-  let l:code = l:code . "it \"returns true\" do\n"
+  let l:code = l:code . "describe '#method' do\n"
+  let l:code = l:code . "it 'returns true' do\n"
   let l:code = l:code . "subject.method\n"
   let l:code = l:code . "\nend"
   let l:code = l:code . "\nend"
