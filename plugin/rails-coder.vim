@@ -26,9 +26,9 @@ function! RailsCoderClassFileString(...)
   let l:code = l:code . "end\n"
   let l:code = l:code . "\n"
   let l:code = l:code . "def method\n"
-  let l:code = l:code . "# Put your implementation here\n"
-  let l:code = l:code . "puts @var\n"
-  let l:code = l:code . "end"
+  let l:code = l:code . "\n"
+  let l:code = l:code . "\nputs @var\n"
+  let l:code = l:code . "\nend"
 
   for i in l:class_names
     let l:code = l:code . "\nend"
@@ -57,7 +57,7 @@ function! RailsCoderSpecFileString(...)
   let l:code = l:code . "\n"
   let l:code = l:code . "describe '#method' do\n"
   let l:code = l:code . "it 'returns true' do\n"
-  let l:code = l:code . "subject.method\n"
+  let l:code = l:code . "subject.method"
   let l:code = l:code . "\nend"
   let l:code = l:code . "\nend"
   let l:code = l:code . "\nend"
