@@ -50,7 +50,7 @@ function! RailsCoderSpecFileString(...)
 
   let l:code = "require '" . join(l:class_names, "/") . "'\n"
   let l:code = l:code . "\n"
-  let l:code = l:code . "describe " . join(l:camel_cased_class_names, "::") . " do\n"
+  let l:code = l:code . "RSpec.describe " . join(l:camel_cased_class_names, "::") . " do\n"
   let l:code = l:code . "let(:item) { instance_double('Class', method: true) }\n"
   let l:code = l:code . "\n"
   let l:code = l:code . "subject { described_class.new(item) }\n"
